@@ -20,16 +20,6 @@ db=client.covid
 state=db.state
 district=db.district
 
-@app.route('/global', methods = ["GET"]) 
-def getGlobal():
-    response = requests.get('https://api.covid19api.com/summary',headers={"Content-Type": "application/json"})
-    return json.dumps(response.json()["Global"])
-
-@app.route('/countries', methods = ["GET"]) 
-def getCountries():
-    response = requests.get('https://api.covid19api.com/summary',headers={"Content-Type": "application/json"})
-    return json.dumps(response.json()["Countries"])
-
 @app.route('/districts', methods = ["GET"])
 def getDistricts():
     objects = district.find({"name":"Mumbai City"})
