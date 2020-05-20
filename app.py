@@ -111,7 +111,6 @@ def scrapeIndiaStates():
     objects = state.find({"name":"Maharashtra"})
     date = ''
     for x in objects:
-        print(x)
         if x["timestamp"]:
             date = x["timestamp"]
     if str(datetime.date(datetime.now())) == str(date):
@@ -120,6 +119,7 @@ def scrapeIndiaStates():
         for state_item in stateArray:
             state_item["_id"] = str(state_item["_id"])
             response.append(state_item)
+        response[3]["totalCases"] = response[3]["totalCases"][0:-3]
         return json.dumps(response)
     
     print("Enteted once")
@@ -281,5 +281,5 @@ def scrapeState():
         x["_id"] = str(x["_id"])
         return json.dumps(x)
 if __name__ == '__main__':  
-    app.run(host='0.0.0.0',port=8082,debug = True)
+    app.run(host='127.0.0.1',port=8082,debug = True)
 
