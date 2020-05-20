@@ -61,7 +61,9 @@ def getDistricts():
                 temp.append(th.a.get_text())    # The problem is here, I m not able to get the inner content of 'a' tag. Not able to do th.a.text
             headers.append(temp)
     # print(headers)
-    del headers[4]
+    for i in range(4,9):
+        del headers[4]
+    # print(headers)
     rows = []
     idx = 0
     idx1 = 0
