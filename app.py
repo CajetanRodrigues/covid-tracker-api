@@ -21,6 +21,12 @@ state=db.state
 district=db.district
 country = db.country
 
+@app.route('/', methods = ["GET"])
+def getServerStatus():
+    return json.dumps({
+        "status":"online"
+    })
+
 @app.route('/districts', methods = ["GET"])
 def getDistricts():
     objects = district.find({"name":"Mumbai City"})
@@ -36,6 +42,8 @@ def getDistricts():
             district_item["_id"] = str(district_item["_id"])
             response.append(district_item)
         return json.dumps(response)
+    print("Enteted once")
+    district.delete_many({})
     headers = {'User-Agent': 'Mozilla/5.0'}
     page = requests.get("https://en.wikipedia.org/wiki/COVID-19_pandemic_in_Maharashtra", headers=headers)
 
@@ -113,6 +121,9 @@ def scrapeIndiaStates():
             state_item["_id"] = str(state_item["_id"])
             response.append(state_item)
         return json.dumps(response)
+    
+    print("Enteted once")
+    state.delete_many({})
     headers = {'User-Agent': 'Mozilla/5.0'}
     page = requests.get("https://en.wikipedia.org/wiki/COVID-19_pandemic_in_India", headers=headers)
 
@@ -174,7 +185,7 @@ def scrapeIndiaStates():
     return json.dumps(response)
 
 
-@app.route('/country', methods = ["GET"]) 
+@app.route('/countries', methods = ["GET"]) 
 def scrapeWorldCountries():
     objects = country.find({"name":"Global"})
     date = ''
@@ -191,7 +202,8 @@ def scrapeWorldCountries():
         del response[0]
         return json.dumps(response)
     
-    print("fuck ua")
+    print("Entered once")
+    country.delete_many({})
     headers = {'User-Agent': 'Mozilla/5.0'}
     page = requests.get("https://en.wikipedia.org/wiki/Template:COVID-19_pandemic_data", headers=headers)
 
@@ -224,7 +236,7 @@ def scrapeWorldCountries():
         temp = {}
         thArray = table_data[i].find_all("th")
         # print(thArray)
-        temp["Location"] = thArray[1].a.text
+        temp["name"] = thArray[1].a.text
         
         tdArray = table_data[i].find_all("td")
         # print(tdArray)
@@ -252,6 +264,22 @@ def scrapeGlobal():
         x["_id"] = str(x["_id"])
         return json.dumps(x)
     
+
+@app.route('/country', methods = ["GET"]) 
+def scrapeCountry():
+    countryCases = country.find({"name":"India"})
+    for x in countryCases:
+        x["_id"] = str(x["_id"])
+        print(x)
+        return json.dumps(x)
+
+
+@app.route('/state', methods = ["GET"]) 
+def scrapeState():
+    stateCases = state.find({"name":"Maharashtra"})
+    for x in stateCases:
+        x["_id"] = str(x["_id"])
+        return json.dumps(x)
 if __name__ == '__main__':  
     app.run(host='0.0.0.0',port=8082,debug = True)
 
