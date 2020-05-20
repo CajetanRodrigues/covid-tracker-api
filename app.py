@@ -63,7 +63,6 @@ def getDistricts():
     # print(headers)
     for i in range(4,9):
         del headers[4]
-    # print(headers)
     rows = []
     idx = 0
     idx1 = 0
