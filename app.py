@@ -35,7 +35,7 @@ def getDistricts():
         print(x)
         if x["timestamp"]:
             date = x["timestamp"]
-    if str(datetime.date(datetime.now())) == str(date):
+    if str(datetime.utcnow().strftime("%Y%m%d")) == str(date):
         response = []
         districtArray = district.find()
         for district_item in districtArray:
@@ -113,7 +113,7 @@ def scrapeIndiaStates():
     for x in objects:
         if x["timestamp"]:
             date = x["timestamp"]
-    if str(datetime.date(datetime.now())) == str(date):
+    if str(datetime.utcnow().strftime("%Y%m%d")) == str(date):
         response = []
         stateArray = state.find()
         for state_item in stateArray:
@@ -193,7 +193,7 @@ def scrapeWorldCountries():
         print(x)
         if x["timestamp"]:
             date = x["timestamp"]
-    if str(datetime.date(datetime.now())) == str(date):
+    if str(datetime.utcnow().strftime("%Y%m%d")) == str(date):
         response = []
         globalArray = country.find()
         for global_item in globalArray:
