@@ -92,9 +92,9 @@ def getDistricts():
     for row in rows[0:len(rows)-1]:
         temp = {}
         temp["name"] = row[0]
-        temp["totalCases"] = row[1]
-        temp["recovered"] = row[2]
-        temp["deaths"] = row[3]
+        temp["totalCases"] = row[1].replace(",","")
+        temp["recovered"] = row[2].replace(",","")
+        temp["deaths"] = row[3].replace(",","")
         temp["timestamp"] = str(datetime.date(datetime.now()))
         finalArray.append(temp)
     district.insert_many(finalArray)
@@ -169,10 +169,10 @@ def scrapeIndiaStates():
     for row in rows:
         temp = {}
         
-        temp["totalCases"] = row[0]
-        temp["deaths"] = row[1]
-        temp["recoveries"] = row[2]
-        temp["activeCases"] = row[3]
+        temp["totalCases"] = row[0].replace(",","")
+        temp["deaths"] = row[1].replace(",","")
+        temp["recoveries"] = row[2].replace(",","")
+        temp["activeCases"] = row[3].replace(",","")
         temp["name"] = row[5] 
         temp["timestamp"] = str(datetime.date(datetime.now()))
         JsonObjectArray.append(temp)
@@ -240,9 +240,9 @@ def scrapeWorldCountries():
         
         tdArray = table_data[i].find_all("td")
         # print(tdArray)
-        temp["confirmed"] = tdArray[0].text.replace("\n","")
-        temp["deaths"] = tdArray[1].text.replace("\n","")
-        temp["recovered"] = tdArray[2].text.replace("\n","")
+        temp["confirmed"] = tdArray[0].text.replace("\n","").replace(",","")
+        temp["deaths"] = tdArray[1].text.replace("\n","").replace(",","")
+        temp["recovered"] = tdArray[2].text.replace("\n","").replace(",","")
         temp["timestamp"] = str(datetime.date(datetime.now()))
         globalArray.append(temp)
         # print(temp)
