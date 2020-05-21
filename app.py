@@ -254,7 +254,7 @@ def scrapeWorldCountries():
     for country_item in countryArray:
             country_item["_id"] = str(country_item["_id"])
             response.append(country_item)
-    del response[len(response)-1]
+    del response[0]
     return json.dumps(response)
 
 @app.route('/global', methods = ["GET"]) 
