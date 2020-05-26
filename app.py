@@ -240,10 +240,10 @@ def scrapeWorldCountries():
         
         tdArray = table_data[i].find_all("td")
         # print(tdArray)
-        temp["confirmed"] = tdArray[0].text.replace(",","")
-        temp["deaths"] = tdArray[1].text.replace(",","")
-        if tdArray[2].text.replace(",","") == 'No data': temp["recovered"] = -1
-        else: temp["recovered"] = tdArray[2].text.replace(",","")
+        temp["confirmed"] = tdArray[0].text.replace(",","").replace("\n","")
+        temp["deaths"] = tdArray[1].text.replace(",","").replace("\n","")
+        if tdArray[2].text.replace(",","").replace("\n","") == 'No data': temp["recovered"] = -1
+        else: temp["recovered"] = tdArray[2].text.replace(",","").replace("\n","")
         temp["timestamp"] = str(datetime.date(datetime.now()))
         globalArray.append(temp)
         # print(temp)
