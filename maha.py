@@ -16,6 +16,7 @@ data = []
 for i in range(len(table_data)):
     for td in table_data[i].find_all("td"):
         data.append(td.text.replace('\n', ' ').strip())
+        print(td.text.replace('\n', ' ').strip())
 # print(data)
 # del data[4]
     
@@ -44,7 +45,8 @@ while True :
     idx2+=4
 
 finalArray = []
-for row in rows[0:len(rows)-1]:
+for row in rows[0:len(rows)-2]:
+    print(row)
     temp = {}
     temp["name"] = row[0]
     temp["totalCases"] = row[1]

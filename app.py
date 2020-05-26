@@ -89,7 +89,7 @@ def getDistricts():
     
 
     finalArray = []
-    for row in rows[0:len(rows)-1]:
+    for row in rows[0:len(rows)-2]:
         temp = {}
         temp["name"] = row[0]
         temp["totalCases"] = row[1].replace(",","")
