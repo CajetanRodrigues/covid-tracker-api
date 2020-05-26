@@ -240,10 +240,10 @@ def scrapeWorldCountries():
         
         tdArray = table_data[i].find_all("td")
         # print(tdArray)
-        temp["confirmed"] = tdArray[0].text.replace("\n","").replace(",","")
-        temp["deaths"] = tdArray[1].text.replace("\n","").replace(",","")
-        if tdArray[2].text.replace("\n","").replace(",","") == 'No data': temp["recovered"] = -1
-        else: temp["recovered"] = tdArray[2].text.replace("\n","").replace(",","")
+        temp["confirmed"] = tdArray[0].text.replace(",","")
+        temp["deaths"] = tdArray[1].text.replace(",","")
+        if tdArray[2].text.replace(",","") == 'No data': temp["recovered"] = -1
+        else: temp["recovered"] = tdArray[2].text.replace(",","")
         temp["timestamp"] = str(datetime.date(datetime.now()))
         globalArray.append(temp)
         # print(temp)
@@ -281,6 +281,17 @@ def scrapeState():
     for x in stateCases:
         x["_id"] = str(x["_id"])
         return json.dumps(x)
+@app.route('/returnCountryDeaths', methods = ["GET"]) 
+def ret():
+    countries = country.find()
+    res = []
+    for x in countries:
+        x["_id"] = str(x["_id"])
+        res.append(x)
+        deaths = []
+    for x in res:
+        deaths.append(x["deaths"])
+    return json.dumps(deaths)
 if __name__ == '__main__':  
-    app.run(host='0.0.0.0',port=8082,debug = True)
+    app.run(host='127.0.0.1',port=8082,debug = True)
 
