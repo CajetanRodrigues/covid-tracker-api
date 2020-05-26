@@ -242,7 +242,7 @@ def scrapeWorldCountries():
         # print(tdArray)
         temp["confirmed"] = tdArray[0].text.replace("\n","").replace(",","")
         temp["deaths"] = tdArray[1].text.replace("\n","").replace(",","")
-        if temp["recovered"] == 'No data': temp["recovered"] = -1
+        if tdArray[2].text.replace("\n","").replace(",","") == 'No data': temp["recovered"] = -1
         else: temp["recovered"] = tdArray[2].text.replace("\n","").replace(",","")
         temp["timestamp"] = str(datetime.date(datetime.now()))
         globalArray.append(temp)
