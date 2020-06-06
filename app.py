@@ -198,6 +198,7 @@ def scrapeWorldCountries():
         globalArray = country.find()
         for global_item in globalArray:
             global_item["_id"] = str(global_item["_id"])
+            global_item["deaths"] = str(global_item["deaths"]).replace(",","")
             response.append(global_item)
         del response[0]
         return json.dumps(response)
@@ -240,10 +241,10 @@ def scrapeWorldCountries():
         
         tdArray = table_data[i].find_all("td")
         # print(tdArray)
-        temp["confirmed"] = tdArray[0].text.replace(",","").replace("\n","")
-        temp["deaths"] = tdArray[1].text.replace(",","").replace("\n","")
-        if tdArray[2].text.replace(",","").replace("\n","") == 'No data': temp["recovered"] = -1
-        else: temp["recovered"] = tdArray[2].text.replace(",","").replace("\n","")
+        temp["confirmed"] = str(tdArray[0].text).replace(",","").replace("\n","")
+        temp["deaths"] = str(tdArray[1].text).replace(",","").replace("\n","")
+        if str(tdArray[2].text).replace(",","").replace("\n","") == 'No data': temp["recovered"] = -1
+        else: temp["recovered"] = str(tdArray[2].text).replace(",","").replace("\n","")
         temp["timestamp"] = str(datetime.date(datetime.now()))
         globalArray.append(temp)
         # print(temp)
@@ -254,6 +255,7 @@ def scrapeWorldCountries():
     countryArray = country.find()
     for country_item in countryArray:
             country_item["_id"] = str(country_item["_id"])
+            country_item["deaths"] = str(country_item["deaths"]).replace(",","")
             response.append(country_item)
     del response[0]
     return json.dumps(response)
@@ -288,7 +290,7 @@ def ret():
     for x in countries:
         x["_id"] = str(x["_id"])
         res.append(x)
-        deaths = []
+    deaths = []
     for x in res:
         deaths.append(x["deaths"])
     return json.dumps(deaths)
