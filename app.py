@@ -14,7 +14,7 @@ app = Flask(__name__)
 CORS(app)
 
 
-client = MongoClient('mongodb+srv://admin:admin@cluster0-qbkxj.mongodb.net/test?retryWrites=true&w=majority',27017)
+client = MongoClient('mongodb+srv://admin:admin@cluster0-nwyig.mongodb.net/gunsnroses?retryWrites=true&w=majority',27017)
 # client=MongoClient('localhost',27017)
 db=client.covid
 state=db.state
